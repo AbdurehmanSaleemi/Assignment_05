@@ -8,7 +8,8 @@ class Equipment{
     public:
     Equipment();
     Equipment(int id, std::string name);
-    void setEquipment(int id, std::string name);
+    void setEquipmentId(int id);
+    void setEquipmentName(std::string name);
     void printEquipintment();
     int getEquipmentId();
     std::string getEquipmentName();

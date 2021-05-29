@@ -2,6 +2,7 @@
 #include "Customer.cpp"
 #include "Equipment.cpp"
 #include "Trainer.cpp"
+#include "exercisePlan.cpp"
 
 int main(){
     // Date d(2,3,1995);
@@ -20,32 +21,39 @@ int main(){
     // {
     //     custData[i].printCustomerData();
     // }
-    // Equipment eq[3];
+    Equipment eq[3];
 
-    // int id = 1;
-    // std::string eqName[3] = {"Treadmill", "Dumbell", "Cycle"};
+    int id = 1;
+    std::string eqName[3] = {"Treadmill", "Dumbell", "Cycle"};
 
-    // for (int i = 0; i < 3; i++)
-    // {
-    //     eq[i].setEquipment(id, eqName[i]);
-    //     id++;
-    // }
-    // for (int i = 0; i < 3; i++)
-    // {
-    //     eq[i].printEquipintment();
-    // }
+    for (int i = 0; i < 3; i++)
+    {
+        eq[i].setEquipmentId(id);
+        eq[i].setEquipmentName(eqName[i]);
+        id++;
+    }
     
-    // Trainers t[3];
-    // std::string name[3] = {"Hamza", "Ali","Adnan"};
-    // int id = 1;
-    // for (int i = 0; i < 3; i++)
-    // {
-    //     t[i].setTrainer(id, name[i]);
-    //     id++;
-    // }
-    // for (int i = 0; i < 3; i++)
-    // {
-    //     t[i].printTrainer();
-    // }
+    Trainers t[3];
+    std::string name[3] = {"Hamza", "Ali","Adnan"};
+    id = 1;
+    for (int i = 0; i < 3; i++)
+    {
+        t[i].setTrainerId(id);
+        t[i].setTrainerName(name[i]);
+        id++;
+    }
+
+    ExercisePlan plan[3];
+    id = 1;
+    plan[0].setExercisePlan(id, t[0], eq[0], 5);
+    plan[1].setExercisePlan(id, t[1], eq[1], 10);
+    plan[2].setExercisePlan(id, t[2], eq[2], 15);
+
+    for (int i = 0; i < 3; i++)
+    {
+        plan[i].printPlan();
+    }
+    
+
     
 }

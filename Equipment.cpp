@@ -10,11 +10,13 @@ Equipment::Equipment(int id, std::string name){
     equipmentName = name;
 }
 
-void Equipment::setEquipment(int id, std::string name){
+void Equipment::setEquipmentId(int id){
     equipmentId = id;
-    equipmentName = name;
 }
 
+void Equipment::setEquipmentName(std::string name){
+    equipmentName = name;
+}
 int Equipment::getEquipmentId(){
     return equipmentId;
 }
