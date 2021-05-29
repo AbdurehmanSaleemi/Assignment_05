@@ -8,7 +8,8 @@ class Trainers{
     public:
     Trainers();
     Trainers(int id, std::string name);
-    void setTrainer(int id, std::string name);
+    void setTrainerId(int id);
+    void setTrainerName(std::string name);
     void printTrainer();
     int getTrainerId();
     std::string getTrainName();

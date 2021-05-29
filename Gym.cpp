@@ -35,18 +35,17 @@ int main(){
     //     eq[i].printEquipintment();
     // }
     
-    
-    Trainers t[3];
-    std::string name[3] = {"Hamza", "Ali","Adnan"};
-    int id = 1;
-    for (int i = 0; i < 3; i++)
-    {
-        t[i].setTrainer(id, name[i]);
-        id++;
-    }
-    for (int i = 0; i < 3; i++)
-    {
-        t[i].printTrainer();
-    }
+    // Trainers t[3];
+    // std::string name[3] = {"Hamza", "Ali","Adnan"};
+    // int id = 1;
+    // for (int i = 0; i < 3; i++)
+    // {
+    //     t[i].setTrainer(id, name[i]);
+    //     id++;
+    // }
+    // for (int i = 0; i < 3; i++)
+    // {
+    //     t[i].printTrainer();
+    // }
     
 }

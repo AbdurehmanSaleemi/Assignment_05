@@ -10,8 +10,11 @@ Trainers::Trainers(int id, std::string name){
     trainName = name;
 }
 
-void Trainers::setTrainer(int id, std::string name){
+void Trainers::setTrainerId(int id){
     trainerId = id;
+}
+
+void Trainers::setTrainerName(std::string name){
     trainName = name;
 }
 
