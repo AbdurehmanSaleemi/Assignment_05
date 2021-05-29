@@ -1,5 +1,6 @@
 #include "Date.cpp"
 #include "Customer.cpp"
+#include "Trainer.cpp"
 
 int main(){
     // Date d(2,3,1995);
@@ -18,6 +19,17 @@ int main(){
     // {
     //     custData[i].printCustomerData();
     // }
-    
+    Trainers t[3];
+    std::string name[3] = {"Hamza", "Ali","Adnan"};
+    int id = 1;
+    for (int i = 0; i < 3; i++)
+    {
+        t[i].setTrainer(id, name[i]);
+        id++;
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        t[i].printTrainer();
+    }
     
 }
