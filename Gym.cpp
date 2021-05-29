@@ -1,5 +1,6 @@
 #include "Date.cpp"
 #include "Customer.cpp"
+#include "Equipment.cpp"
 
 int main(){
     // Date d(2,3,1995);
@@ -18,6 +19,21 @@ int main(){
     // {
     //     custData[i].printCustomerData();
     // }
+    // Equipment eq[3];
+
+    // int id = 1;
+    // std::string eqName[3] = {"Treadmill", "Dumbell", "Cycle"};
+
+    // for (int i = 0; i < 3; i++)
+    // {
+    //     eq[i].setEquipment(id, eqName[i]);
+    //     id++;
+    // }
+    // for (int i = 0; i < 3; i++)
+    // {
+    //     eq[i].printEquipintment();
+    // }
+    
     
     
 }
