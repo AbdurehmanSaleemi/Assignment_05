@@ -1,10 +1,7 @@
 #include "Date.cpp"
 #include "Customer.cpp"
-<<<<<<< HEAD
 #include "Equipment.cpp"
-=======
 #include "Trainer.cpp"
->>>>>>> 5d2f8cc339ead99781283cc0613168a9a4eae8db
 
 int main(){
     // Date d(2,3,1995);
@@ -23,7 +20,6 @@ int main(){
     // {
     //     custData[i].printCustomerData();
     // }
-<<<<<<< HEAD
     // Equipment eq[3];
 
     // int id = 1;
@@ -40,7 +36,6 @@ int main(){
     // }
     
     
-=======
     Trainers t[3];
     std::string name[3] = {"Hamza", "Ali","Adnan"};
     int id = 1;
@@ -53,6 +48,5 @@ int main(){
     {
         t[i].printTrainer();
     }
->>>>>>> 5d2f8cc339ead99781283cc0613168a9a4eae8db
     
 }
