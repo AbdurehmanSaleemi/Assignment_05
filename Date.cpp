@@ -13,7 +13,7 @@ Date::Date(unsigned int d, unsigned int m,unsigned int y){
     year = y;
 }
 
-void Date::setDate(unsigned int d,unsigned int y,unsigned int m){
+void Date::setDate(unsigned int d,unsigned int m,unsigned int y){
     day = d;
     month = m;
     year = y;
@@ -31,4 +31,21 @@ unsigned int Date::getYear(){
 
 void Date::printDate(){
     std::cout << getDay() << "/" << getMonth() << "/" << getYear() << std::endl;
+}
+
+void Date::operator =(Date &d){
+    day = d.getDay();
+    month = d.getMonth();
+    year = d.getYear();
+}
+
+void Date::userInput(){
+    int d,m,y;
+    std::cout << "Enter Day : ";
+    std::cin >> d;
+    std::cout << "Enter Month : ";
+    std::cin >> m;
+    std::cout << "Enter Year : ";
+    std::cin >> y;
+    setDate(d,m,y);
 }
