@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Trainer.cpp"
-#include "Equipment.hpp"
+#include "Equipment.cpp"
 
 class ExercisePlan{
     protected:

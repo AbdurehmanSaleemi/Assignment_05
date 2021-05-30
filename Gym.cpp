@@ -1,7 +1,7 @@
 #include "Date.cpp"
 #include "Customer.cpp"
-#include "Equipment.cpp"
-#include "Trainer.cpp"
+//#include "Equipment.cpp"
+//#include "Trainer.cpp"
 #include "exercisePlan.cpp"
 
 int main(){
@@ -46,14 +46,14 @@ int main(){
     ExercisePlan plan[3];
     id = 1;
     plan[0].setExercisePlan(id, t[0], eq[0], 5);
+    id++;
     plan[1].setExercisePlan(id, t[1], eq[1], 10);
+    id++;
     plan[2].setExercisePlan(id, t[2], eq[2], 15);
+    id++;
 
     for (int i = 0; i < 3; i++)
     {
         plan[i].printPlan();
     }
-    
-
-    
 }
