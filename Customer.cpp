@@ -42,3 +42,7 @@ std::string Customer::getCustomerEmail(){
 void Customer::printCustomerData(){
     std::cout << getCustomerId() << "   " << getCustomerName() << "   " << getCustomerAddress() << "   " << getPhoneNumber() << "   " << getCustomerEmail() << std::endl;
 }
+
+void Customer::setCustomerId(int id){
+    CustomerId = id;
+}

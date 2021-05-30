@@ -13,6 +13,7 @@ class Customer{
     Customer(unsigned int id, std::string name, std::string address, int number, std::string email);
     void setCustomerDate(unsigned int id, std::string name, std::string address, int number, std::string email);
     void printCustomerData();
+    void setCustomerId(int id);
     unsigned int getCustomerId();
     std::string getCustomerName();
     std::string getCustomerAddress();

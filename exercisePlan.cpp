@@ -35,3 +35,7 @@ int ExercisePlan::getDuration(){
 void ExercisePlan::printPlan(){
     std::cout << getPlanId() << "  " << _getTrainerId() << "  " << _getEquipmentId() << getDuration() << std::endl;
 }
+
+void ExercisePlan::setExercisePlanId(int id){
+    planId = id;
+}

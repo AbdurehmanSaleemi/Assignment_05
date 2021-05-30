@@ -13,6 +13,7 @@ class ExercisePlan{
     ExercisePlan();
     ExercisePlan(int Id, Trainers trId, Equipment eqId, int d);
     void setExercisePlan(int Id, Trainers trId, Equipment eqId, int d);
+    void setExercisePlanId(int id);
     void printPlan();
     int getPlanId();
     int _getTrainerId();
