@@ -14,7 +14,7 @@ ExercisePlan::ExercisePlan(int Id, Trainers trId, Equipment eqId, int d){
 
 void ExercisePlan::setExercisePlan(int Id, Trainers trId, Equipment eqId, int d){
     planId = Id;
-    trainerId.setTrainerId(trId.getTrainerId());
+    trainerId.setTrainerId(trId.getTrainerId()); // trainer 1 ,2 // tr[2] t[0] 
     equipmentId.setEquipmentId(eqId.getEquipmentId());
     duration = d;
 }

@@ -4,7 +4,7 @@
 
 template <typename T>
 void increaseSize(T *&oldArr, int oldSize){
-    int newSize = oldSize + 1;
+    int newSize = oldSize;
     T *temp = new T[newSize];
     for (int i = 0; i < oldSize; i++)
     {
