@@ -1465,7 +1465,67 @@ public:
                     else if(i == subscriptionArraySize - 1 && index == 0){
                         std::cout << "ID not found \n";
                     }
-                } 
+                }
+                //Gym Schedule
+                int planID;
+                int temp = 0;
+                std::cout << "Enter the Plan ID = ";
+                std::cin >> planID;
+                for (int i = 0; i < subscriptionArraySize; i++)
+                {
+                    if(subscriptionArray[i].getPlanId() == planID){
+                        temp = i;
+                        break;
+                    }
+                    else if(i == exercisePlanArraySize - 1 && temp == 0){
+                        std::cout << "ID not Found\n";
+                    }
+                }
+                if(temp != 0){
+                    std::cout << "----------  G Y M - S C H E D U L E-------------\n";
+                    std::cout << "Plan id\n";
+                    subscriptionArray[temp].printData();
+                }
+
+                //Trainer Schedule
+                bool isFound = false;
+                int trID = 0;
+                int key = 0;
+                std::cout << "Enter the Trainer ID = ";
+                std::cin >> trID;
+                for (int i = 0; i < exercisePlanArraySize; i++)
+                {
+                    if(exercisePlanArray[i]._getTrainerId() == id){
+                        key = i;
+                        std::cout << "ID Found\n";
+                        isFound = true;
+                        break;
+                    }
+                    else if(i == exercisePlanArraySize - 1 && key == 0){
+                        std::cout << "No ID Found\n";
+                    }
+                }
+                if(isFound){
+                    std::cout << "---------- T R I N E R S - S C H E D U L E ---------------\n";
+                    std::cout << "Trainer ID  |  " << "  Date    |  " << "Assigned to \n";
+                    std::cout << exercisePlanArray[key].getPlanId() << "              ";
+                    id = exercisePlanArray[key].getPlanId();
+                    isFound = false;
+                    for (int i = 0; i < subscriptionArraySize; i++)
+                    {
+                        if(subscriptionArray[i].getPlanId() == id){
+                            key = i;
+                            isFound = true;
+                            break;
+                        }
+                        else if(i == subscriptionArraySize - 1 && key == 0){
+                            std::cout << "No Other Data Found\n";
+                        }
+                    }
+                    if(isFound){
+                        std::cout << subscriptionArray[key].getDate() << "            " << subscriptionArray[key].getCustomerId() << "\n";
+                    }
+                }
             }
             else if (menu(usrChoice) == -1) {
                 isRunning = false;
