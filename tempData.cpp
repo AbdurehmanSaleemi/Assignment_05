@@ -3,26 +3,6 @@
     // bool isRunning = true;
     // int indexOfDate = 0;
     // int choice; 
-    // while(isRunning){
-    //     d[indexOfDate].userInput();
-    //     std::cout << "Want to Enter more ? Press 1 for yes & 0 for No";
-    //     std::cout << "Choice = ";
-    //     std::cin >> choice;
-    //     if(choice != 1){
-    //         isRunning = false;
-    //     }
-    //     else{
-    //         indexOfDate++;
-    //         dateArraySize++;
-    //         increaseSize<Date>(d,dateArraySize);
-    //     }
-    // }
-
-    // for (int i = 0; i < dateArraySize; i++)
-    // {
-    //     d[i].printDate();
-    // }
-
     // unsigned int day, month, year;
     // std::ifstream DateRead;
     // DateRead.open("Data/date.txt");
@@ -36,23 +16,7 @@
     //         increaseSize<Date>(d, dateArraySize);
     //     }
     // }
-    // for (int i = 0; i < dateArraySize - 1; i++)
-    // {
-    //     d[i].printDate();
-    // }
 
-
-    // isRunning = true;
-
-    // bool _operationComplete = true;
-    // while(_operationComplete){  
-    //     int da,m,y;
-    //     std::cout << "Enter day,month,year = ";
-    //     std::cin >> da >> m >> y;
-    //     removeDate(d, dateArraySize, da, m, y);
-    //     dateArraySize--;
-    //     _operationComplete = false;
-    // }
 
     // for (int i = 0; i < dateArraySize; i++)
     // {

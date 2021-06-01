@@ -833,6 +833,168 @@ int subMenu(int choice){
     return 0;
 }
 
+void loadCustomerFromFile(Customer *& c, int CustArraySize, int &i){
+    bool isRunning = true;
+    int indexOfCustomer = 0;
+    int choice;
+    int CId;
+    std::string CName;
+    std::string CAddress;
+    int phNumber;
+    std::string CEmail;
+
+    std::ifstream dataRead;
+    dataRead.open("customers.txt");
+
+    if (dataRead.is_open()) {
+        while (!dataRead.eof()) {
+            dataRead >> CId;
+            dataRead >> CName;
+            dataRead >> CAddress;
+            dataRead >> phNumber;
+            dataRead >> CEmail;
+            c[i].setCustomerData(CId, CName, CAddress, phNumber, CEmail);
+            i++;
+            CustArraySize++;
+            Customer* temp = new Customer[CustArraySize];
+            for (int i = 0; i < CustArraySize - 1; i++)
+            {
+                temp[i] = c[i];
+            }
+            delete[] c;
+            c = temp;
+        }
+        std::cout << "Data from Customers.txt loaded Successfully" << std::endl;
+    }
+    else
+    {
+        std::cout << "Error !" << std::endl;
+    }
+}
+
+void loadTrainersFromFile(Trainers *& t, int &sizeOfTrainers, int &indexOfTrainer){
+    std::ifstream dataRead;
+    dataRead.open("Trainers.txt");
+
+    int id = 0;
+    int i = 0;
+    std::string name;
+    if(dataRead.is_open()){
+        while (!dataRead.eof()){
+            dataRead >> id;
+            while(getline(dataRead, name)){
+                break;
+            }
+            t[indexOfTrainer].setTrainerName(name);
+            t[indexOfTrainer].setTrainerId(id);
+            indexOfTrainer++;
+            sizeOfTrainers++;
+            Trainers* temp = new Trainers[sizeOfTrainers];
+            for (int i = 0; i < sizeOfTrainers - 1; i++)
+            {
+                temp[i] = t[i];
+            }
+            delete[] t;
+            t = temp;
+        }
+        std::cout << "Data from Trainers.txt loaded Successfully" << std::endl;
+    }
+    else
+    {
+        std::cout << "Error ! \n";
+    }
+}
+
+void loadEquipmentsFromFile(Equipment *&e, int &sizeOfEquipments, int &indexOfEquipment){
+    std::ifstream dataReadOfEquipments;
+    dataReadOfEquipments.open("Data/equipment.txt");
+    int id = 0;
+    std::string equipmentName;
+    if(dataReadOfEquipments.is_open()){
+        while (!dataReadOfEquipments.eof()){
+            dataReadOfEquipments >> id;
+            while(getline(dataReadOfEquipments, equipmentName)){
+                break;
+            }
+            e[indexOfEquipment].setEquipmentName(equipmentName);
+            e[indexOfEquipment].setEquipmentId(id);
+            indexOfEquipment++;
+            sizeOfEquipments++;
+            Equipment* temp = new Equipment[sizeOfEquipments];
+            for (int i = 0; i < sizeOfEquipments - 1; i++)
+            {
+                temp[i] = e[i];
+            }
+            delete[] e;
+            e = temp;
+        }
+        std::cout << "Data from Equipment.txt loaded Successfully" << std::endl;
+    }
+    else
+    {
+        std::cout << "Error ! \n";
+    }
+}
+
+void loadExercisePlansFromFile(ExercisePlan*& ex ,int &sizeOfExercisePlan, int &indexOfPlan){
+
+    std::ifstream PlanRead;
+    PlanRead.open("Data/exercisePlans.txt");
+    int planId = 0;
+    int trainerId = 0; int equipmentId = 0; int duration = 0;
+    Trainers tr;
+    Equipment eq;
+    if(PlanRead.is_open()){
+        while(!PlanRead.eof()){
+            PlanRead >> planId;
+            PlanRead >> equipmentId;
+            PlanRead >> trainerId;
+            PlanRead >> duration;
+            tr.setTrainerId(trainerId);
+            eq.setEquipmentId(equipmentId);
+            ex[indexOfPlan].setExercisePlan(planId, tr, eq, duration);
+            indexOfPlan++;
+            sizeOfExercisePlan++;
+            increaseSize<ExercisePlan>(ex, sizeOfExercisePlan);
+        }
+        std::cout << "Data from ExercisePlans.txt loaded Successfully" << std::endl;
+    }
+    else
+    {
+        std::cout << "Error ! \n";
+    }
+}
+
+void loadSubscriptionsFromFile(Subscription *&s, int sizeOfSubData, int &indexOfSub){
+    int id, d, m, y, cusId, planId;
+    std::ifstream loadSub;
+    loadSub.open("Data/subscriptions.txt");
+
+    if(loadSub.is_open()){
+        while(!loadSub.eof()){
+            loadSub >> id >> d >> m >> y >> cusId >> planId;
+            Date date;
+            Customer c;
+            ExercisePlan ex;
+            date.setDate(d, m, y);
+            c.setCustomerId(cusId);
+            ex.setExercisePlanId(planId);
+            s[indexOfSub].setIdOfSubscription(id);
+            s[indexOfSub].setCustomerId(c);
+            s[indexOfSub].setDate(date);
+            s[indexOfSub].setExercisePlanId(ex);
+            indexOfSub++;
+            sizeOfSubData++;
+            increaseSize<Subscription>(s, sizeOfSubData);
+        }
+        std::cout << "Data from Subscriptions.txt loaded Successfully" << std::endl;
+    }
+    else
+    {
+        std::cout << "Error ! \n";
+    }
+    
+}
 void SubMenu(){
     std::cout << "------ D A T E -------\n";
     std::cout << "1. Add Date\n";
@@ -885,6 +1047,21 @@ int main() {
     int exercisePlanArraySize = 1;
     ExercisePlan *exercisePlanArray = new ExercisePlan[exercisePlanArraySize];
     int exercisePlanIndex = 0;
+
+    int subscriptionArraySize = 1;
+    Subscription *subscriptionArray = new Subscription[subscriptionArraySize];
+    int subscriptionIndex = 0;
+
+
+    //Loading Data from Files
+    std::cout << "\n";
+    std::cout << "------------- D A T A - F R O M - F I L E S ------------------\n";
+    loadCustomerFromFile(customerArray, customerArraySize, customerIndex);
+    loadTrainersFromFile(trainerArray, trainerArraySize, trainerIndex);
+    loadEquipmentsFromFile(equipmentArray, equipmentArraySize, equipmentIndex);
+    loadExercisePlansFromFile(exercisePlanArray, exercisePlanArraySize, exercisePlanIndex);
+    loadSubscriptionsFromFile(subscriptionArray, subscriptionArraySize, subscriptionIndex);
+    std::cout << "-------------------------------------------------------------\n";
 
 
     int usrChoice = 0;
@@ -1031,7 +1208,7 @@ int main() {
                         std::cout << "Enter id of Trainer you want to Delete = ";
                         std::cin >> id;
                         removeTrainer(trainerArray, trainerArraySize,id);
-                        customerArraySize--;
+                        trainerArraySize--;
                         if(removeTrainer(trainerArray, trainerArraySize,id) != -1){
                             std::cout << "Trainer Deleted Successfully\n";
                             _operationComplete = false;
@@ -1139,9 +1316,63 @@ int main() {
                         std::cout << "Enter id of Plan you want to Delete = ";
                         std::cin >> id;
                         removeExercisePlan(exercisePlanArray, exercisePlanArraySize,id);
-                        equipmentArraySize--;
+                        exercisePlanArraySize--;
                         if(removeExercisePlan(exercisePlanArray, exercisePlanArraySize,id) != -1){
                             std::cout << "Exercise Plan Deleted Successfully\n";
+                            _operationComplete = false;
+                        }
+                        else{
+                            std::cout << "Enter Valid Id\n";
+                        }
+                    }
+                }
+                else if(subMenu(usrChoice) == 16){
+                    subscriptionArray[subscriptionIndex].inputData();
+                    subscriptionArraySize++;
+                    exercisePlanIndex++;
+                    Subscription* temp = new Subscription[subscriptionArraySize];
+                    for (int i = 0; i < subscriptionArraySize - 1; i++)
+                    {
+                        temp[i] = subscriptionArray[i];
+                    }
+                    delete [] subscriptionArray;
+                    subscriptionArray = temp;
+                    std::cout << "1 Subscription added successfully\n";
+                }
+                else if(subMenu(usrChoice) == 17){
+                    int id = 0;
+                    bool isFound = false;
+                    int index = 0;
+                    std::cout << "Enter the Exercise Plan ID you want to edit\nId = ";
+                    std::cin >> id;
+                    for (int i = 0; i < subscriptionArraySize; i++){
+                        if(subscriptionArray[i].getPlanId() == id){
+                            isFound = true;
+                            std::cout << "Data Found\n";
+                            index = i;
+                            break;
+                        }
+                        else if(i == subscriptionArraySize - 1 && index == 0){
+                            std::cout << "No id found\n";
+                        }
+                    }
+                    if(isFound){
+                        Subscription temp;
+                        temp.inputData();
+                        subscriptionArray[index].editSubscription(temp);
+                        std::cout << "Subscription Edited Successfully\n";
+                    }
+                }
+                else if(subMenu(usrChoice) == 18){
+                    bool _operationComplete = true;
+                    while(_operationComplete){  
+                        int id;
+                        std::cout << "Enter id of Plan you want to Delete = ";
+                        std::cin >> id;
+                        removeSubscription(subscriptionArray, subscriptionArraySize,id);
+                        subscriptionArraySize--;
+                        if(removeSubscription(subscriptionArray, subscriptionArraySize,id) != -1){
+                            std::cout << "Subscription Deleted Successfully\n";
                             _operationComplete = false;
                         }
                         else{
