@@ -476,7 +476,10 @@ int Subscription::getCustomerId() {
 }
 ;
 void Subscription::printData() {
-    std::cout << getSubId() << " " << getDate() << " " << getPlanId() << " " << getCustomerId() << std::endl;
+    std::cout << "---------------------------------------------------------------\n";
+    std::cout << "ID  |  " << "Date    | " << "  Plan ID | " << "Customer ID        " << std::endl;
+    std::cout << getSubId() << "     " << getDate() << "         " << getPlanId() << "            " << getCustomerId() << std::endl;
+    std::cout << "---------------------------------------------------------------\n";
 }
 
 void Subscription::operator=(Subscription& _s) {
@@ -831,7 +834,7 @@ public:
         return 0;
     }
 
-    void loadCustomerFromFile(Customer*& c, int CustArraySize, int& i) {
+    int loadCustomerFromFile(Customer*& c, int CustArraySize, int& i) {
         bool isRunning = true;
         int indexOfCustomer = 0;
         int choice;
@@ -842,7 +845,7 @@ public:
         std::string CEmail;
 
         std::ifstream dataRead;
-        dataRead.open("customers.txt");
+        dataRead.open("Data/customers.txt");
 
         if (dataRead.is_open()) {
             while (!dataRead.eof()) {
@@ -868,11 +871,12 @@ public:
         {
             std::cout << "Error !" << std::endl;
         }
+        return CustArraySize - 1;
     }
 
-    void loadTrainersFromFile(Trainers*& t, int& sizeOfTrainers, int& indexOfTrainer) {
+    int loadTrainersFromFile(Trainers*& t, int& sizeOfTrainers, int& indexOfTrainer) {
         std::ifstream dataRead;
-        dataRead.open("Trainers.txt");
+        dataRead.open("Data/Trainers.txt");
 
         int id = 0;
         int i = 0;
@@ -901,9 +905,10 @@ public:
         {
             std::cout << "Error ! \n";
         }
+        return sizeOfTrainers - 1;
     }
 
-    void loadEquipmentsFromFile(Equipment*& e, int& sizeOfEquipments, int& indexOfEquipment) {
+    int loadEquipmentsFromFile(Equipment*& e, int& sizeOfEquipments, int& indexOfEquipment) {
         std::ifstream dataReadOfEquipments;
         dataReadOfEquipments.open("Data/equipment.txt");
         int id = 0;
@@ -932,9 +937,10 @@ public:
         {
             std::cout << "Error ! \n";
         }
+        return sizeOfEquipments - 1;
     }
 
-    void loadExercisePlansFromFile(ExercisePlan*& ex, int& sizeOfExercisePlan, int& indexOfPlan) {
+    int loadExercisePlansFromFile(ExercisePlan*& ex, int& sizeOfExercisePlan, int& indexOfPlan) {
 
         std::ifstream PlanRead;
         PlanRead.open("Data/exercisePlans.txt");
@@ -961,9 +967,10 @@ public:
         {
             std::cout << "Error ! \n";
         }
+        return sizeOfExercisePlan - 1;
     }
 
-    void loadSubscriptionsFromFile(Subscription*& s, int sizeOfSubData, int& indexOfSub) {
+    int loadSubscriptionsFromFile(Subscription*& s, int sizeOfSubData, int& indexOfSub) {
         int id, d, m, y, cusId, planId;
         std::ifstream loadSub;
         loadSub.open("Data/subscriptions.txt");
@@ -991,6 +998,7 @@ public:
         {
             std::cout << "Error ! \n";
         }
+        return sizeOfSubData - 1;
 
     }
     void SubMenu() {
@@ -1084,12 +1092,19 @@ public:
         //Loading Data from Files
         std::cout << "\n";
         std::cout << "------------- D A T A - F R O M - F I L E S ------------------\n";
-        loadCustomerFromFile(customerArray, customerArraySize, customerIndex);
-        loadTrainersFromFile(trainerArray, trainerArraySize, trainerIndex);
-        loadEquipmentsFromFile(equipmentArray, equipmentArraySize, equipmentIndex);
-        loadExercisePlansFromFile(exercisePlanArray, exercisePlanArraySize, exercisePlanIndex);
-        loadSubscriptionsFromFile(subscriptionArray, subscriptionArraySize, subscriptionIndex);
+        customerArraySize = loadCustomerFromFile(customerArray, customerArraySize, customerIndex);
+        trainerArraySize = loadTrainersFromFile(trainerArray, trainerArraySize, trainerIndex);
+        equipmentArraySize = loadEquipmentsFromFile(equipmentArray, equipmentArraySize, equipmentIndex);
+        exercisePlanArraySize = loadExercisePlansFromFile(exercisePlanArray, exercisePlanArraySize, exercisePlanIndex);
+        subscriptionArraySize = loadSubscriptionsFromFile(subscriptionArray, subscriptionArraySize, subscriptionIndex);
         std::cout << "-------------------------------------------------------------\n";
+
+        //Updating indexes
+        customerIndex = customerArraySize;
+        trainerIndex = trainerArraySize;
+        equipmentIndex = equipmentArraySize;
+        exercisePlanIndex = exercisePlanArraySize;
+        subscriptionIndex = subscriptionArraySize;
 
 
         int usrChoice = 0;
@@ -1436,11 +1451,21 @@ public:
                 }
             }
             else if(menu(usrChoice) == 3){
-                for (int i = 0; i < exercisePlanArraySize -  1; i++)
+                int id = 0;
+                std::cout << "Enter Customer ID = ";
+                std::cin >> id;
+                int index = 0;
+                for (int i = 0; i < subscriptionArraySize; i++)
                 {
-                    exercisePlanArray[i].printPlan();
-                }
-                
+                    if(subscriptionArray[i].getCustomerId() == id){
+                        index = i;
+                        std::cout <<"Entry Found \n";
+                        subscriptionArray[index].printData();
+                    }
+                    else if(i == subscriptionArraySize - 1 && index == 0){
+                        std::cout << "ID not found \n";
+                    }
+                } 
             }
             else if (menu(usrChoice) == -1) {
                 isRunning = false;
