@@ -19,7 +19,7 @@ public:
     unsigned int getYear();
     void operator =(Date& d);
     void userInput();
-    void editDate(Date &d){
+    void editDate(Date& d) {
         setDate(d.getDay(), d.getMonth(), d.getYear());
     }
 };
@@ -97,7 +97,7 @@ public:
     std::string getCustomerEmail();
     void userInput();
     void operator =(Customer _c);
-    void editCustomer(Customer _c){
+    void editCustomer(Customer _c) {
         setCustomerData(_c.getCustomerId(), _c.getCustomerName(), _c.getCustomerAddress(), _c.getPhoneNumber(), _c.getCustomerEmail());
     }
 };
@@ -186,9 +186,9 @@ public:
     void printTrainer();
     int getTrainerId();
     std::string getTrainerName();
-    void operator =(Trainers &t);
+    void operator =(Trainers& t);
     void inputData();
-    void editTrainer(Trainers &_t){
+    void editTrainer(Trainers& _t) {
         setTrainerName(_t.getTrainerName());
         setTrainerId(_t.getTrainerId());
     }
@@ -225,7 +225,7 @@ void Trainers::printTrainer() {
     std::cout << getTrainerId() << "    " << getTrainerName() << std::endl;
 }
 
-void Trainers::inputData(){
+void Trainers::inputData() {
     int id;
     std::string name;
     std::cout << "Enter Trainer ID = ";
@@ -237,7 +237,7 @@ void Trainers::inputData(){
 }
 
 
-void Trainers::operator =(Trainers &t){
+void Trainers::operator =(Trainers& t) {
     trainerId = t.getTrainerId();
     trainName = t.getTrainerName();
 }
@@ -256,9 +256,9 @@ public:
     void printEquipintment();
     int getEquipmentId();
     std::string getEquipmentName();
-    void operator =(Equipment &_e);
+    void operator =(Equipment& _e);
     void inputData();
-    void editEquipment(Equipment &_e){
+    void editEquipment(Equipment& _e) {
         setEquipmentName(_e.getEquipmentName());
         setEquipmentId(_e.getEquipmentId());
     }
@@ -294,12 +294,12 @@ void Equipment::printEquipintment() {
     std::cout << getEquipmentId() << "   " << getEquipmentName() << std::endl;
 }
 
-void Equipment::operator =(Equipment &_e){
+void Equipment::operator =(Equipment& _e) {
     equipmentId = _e.getEquipmentId();
     equipmentName = _e.getEquipmentName();
 }
 
-void Equipment::inputData(){
+void Equipment::inputData() {
     int id;
     std::string name;
     std::cout << "Enter Equipment ID = ";
@@ -328,9 +328,9 @@ public:
     int _getTrainerId();
     int _getEquipmentId();
     int getDuration();
-    void operator =(ExercisePlan &_plan);
+    void operator =(ExercisePlan& _plan);
     void inputData();
-    void editExercisePlan(ExercisePlan &_plan){
+    void editExercisePlan(ExercisePlan& _plan) {
         setExercisePlan(_plan.getPlanId(), _plan.trainerId, _plan.equipmentId, _plan.getDuration());
     }
 };
@@ -371,27 +371,27 @@ int ExercisePlan::getDuration() {
 }
 
 void ExercisePlan::printPlan() {
-    std::cout << getPlanId() << "  " << _getTrainerId() << "  " << _getEquipmentId() << "  " <<  getDuration() << std::endl;
+    std::cout << getPlanId() << "  " << _getTrainerId() << "  " << _getEquipmentId() << "  " << getDuration() << std::endl;
 }
 
 void ExercisePlan::setExercisePlanId(int id) {
     planId = id;
 }
 
-void ExercisePlan::operator =(ExercisePlan &_plan){
+void ExercisePlan::operator =(ExercisePlan& _plan) {
     planId = _plan.getPlanId();
     trainerId.setTrainerId(_plan.getPlanId());
     equipmentId.setEquipmentId(_plan._getEquipmentId());
     duration = _plan.getDuration();
 }
 
-void ExercisePlan::inputData(){
+void ExercisePlan::inputData() {
     int id;
     int t_id;
     int e_id;
     Trainers _t;
     Equipment _e;
-    int d; 
+    int d;
     std::cout << "Enter the Plan Id = ";
     std::cin >> id;
     std::cout << "Enter trainer Id = ";
@@ -425,9 +425,9 @@ public:
     std::string getDate();
     int getPlanId();
     int getCustomerId();
-    void operator =(Subscription &_s);
+    void operator =(Subscription& _s);
     void inputData();
-    void editSubscription(Subscription &_s){
+    void editSubscription(Subscription& _s) {
         setIdOfSubscription(_s.getPlanId());
         setExercisePlanId(_s.exercisePlanId);
         setDate(_s.subDate);
@@ -474,19 +474,19 @@ int Subscription::getPlanId() {
 int Subscription::getCustomerId() {
     return customerId.getCustomerId();
 }
-
+;
 void Subscription::printData() {
     std::cout << getSubId() << " " << getDate() << " " << getPlanId() << " " << getCustomerId() << std::endl;
 }
 
-void Subscription::operator=(Subscription &_s){
+void Subscription::operator=(Subscription& _s) {
     subId = _s.getSubId();
     subDate.setDate(_s.subDate.getDay(), _s.subDate.getMonth(), _s.subDate.getYear());
     exercisePlanId.setExercisePlanId(_s.getPlanId());
     customerId.setCustomerId(_s.getCustomerId());
 }
 
-void Subscription::inputData(){
+void Subscription::inputData() {
     int id = 0;
     Date d;
     ExercisePlan _e;
@@ -509,63 +509,329 @@ void Subscription::inputData(){
     setCustomerId(_c);
 }
 
-class Gym{
-    protected:
-    int dateArraySize;
-    Date *dateArray;
-    int dateIndex = 0;
-
-    int customerArraySize;
-    Customer *customerArray;
-    int customerIndex;
-
-    int trainerArraySize;
-    Trainers *trainerArray;
-    int trainerIndex;
-
-    int equipmentArraySize;
-    Equipment *equipmentArray; 
-    int equipmentIndex = 0;
-
-    int exercisePlanArraySize;
-    ExercisePlan *exercisePlanArray;
-    int exercisePlanIndex;
-
-    int subscriptionArraySize;
-    Subscription *subscriptionArray;
-    int subscriptionIndex;
-
-    public:
-    void init(){
-        dateArraySize = 1;
-        dateArray = new Date[dateArraySize];
-        dateIndex = 0;
-
-        customerArraySize = 1;
-        customerArray = new Customer[customerArraySize];
-        int customerIndex = 0;
-
-        trainerArraySize = 1;
-        trainerArray = new Trainers[trainerArraySize];
-        trainerIndex = 0;
-
-        equipmentArraySize = 1;
-        equipmentArray = new Equipment[equipmentArraySize];
-        equipmentIndex = 0;
-
-        exercisePlanArraySize = 1;
-        exercisePlanArray = new ExercisePlan[exercisePlanArraySize];
-        exercisePlanIndex = 0;
-
-        subscriptionArraySize = 1;
-        subscriptionArray = new Subscription[subscriptionArraySize];
-        subscriptionIndex = 0;
+class Gym {
+public:
+    template <typename T>
+    void increaseSize(T*& oldArr, int& oldSize) {
+        int newSize = oldSize;
+        T* temp = nullptr;
+        temp = new T[newSize];
+        for (int i = 0; i < oldSize; i++)
+        {
+            temp[i] = oldArr[i];
+        }
+        oldSize = newSize;
+        delete[] oldArr;
+        oldArr = temp;
     }
 
-    Gym(){
-        init();
+
+    int removeDate(Date*& container, int containerSize, int FindDay, int FindMonth, int FindYear) {
+
+        int index = 0; // storing the index of the id to be removed
+        for (int i = 0; i < containerSize; i++)
+        {
+            if (container[i].getDay() == FindDay) {
+                if (container[i].getMonth() == FindMonth) {
+                    if (container[i].getYear() == FindYear) {
+                        index = i;
+                        return 0;
+                        break;
+                    }
+                }
+            }
+            else if (i == containerSize - 1 && index == 0) {
+                std::cout << "No entry Found\n";
+                return -1;
+            }
+        }
+
+        int n = containerSize - 1;
+        Date* newArr = new Date[n];
+        for (int i = index; i < containerSize; i++)
+        {
+            Date temp = container[i];
+            container[i] = container[i + 1];
+            container[i + 1] = temp;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            newArr[i] = container[i];
+        }
+        containerSize = n - 1;
+        delete[] container;
+        container = newArr;
+        return 0;
     }
-    void loadCustomerFromFile(Customer *& c, int CustArraySize, int &i){
+
+    int removeCustomer(Customer*& container, int containerSize, int id) {
+
+        int index = 0; // storing the index of the id to be removed
+        for (int i = 0; i < containerSize; i++)
+        {
+            if (container[i].getCustomerId() == id) {
+                index = i;
+                return 0;
+                break;
+            }
+            else if (i == containerSize - 1 && index == 0) {
+                std::cout << "No entry Found\n";
+                return -1;
+            }
+        }
+
+        int n = containerSize - 1;
+        Customer* newArr = new Customer[n];
+        for (int i = index; i < containerSize; i++)
+        {
+            Customer temp = container[i];
+            container[i] = container[i + 1];
+            container[i + 1] = temp;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            newArr[i] = container[i];
+        }
+        containerSize = n - 1;
+        delete[] container;
+        container = newArr;
+        return 0;
+    }
+
+    int removeTrainer(Trainers*& container, int containerSize, int id) {
+
+        int index = 0; // storing the index of the id to be removed
+        for (int i = 0; i < containerSize; i++)
+        {
+            if (container[i].getTrainerId() == id) {
+                index = i;
+                return 0;
+                break;
+            }
+            else if (i == containerSize - 1 && index == 0) {
+                std::cout << "No entry Found\n";
+                return -1;
+            }
+        }
+
+        int n = containerSize - 1;
+        Trainers* newArr = new Trainers[n];
+        for (int i = index; i < containerSize; i++)
+        {
+            Trainers temp = container[i];
+            container[i] = container[i + 1];
+            container[i + 1] = temp;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            newArr[i] = container[i];
+        }
+        containerSize = n - 1;
+        delete[] container;
+        container = newArr;
+        return 0;
+    }
+
+    int removeEquipment(Equipment*& container, int containerSize, int id) {
+
+        int index = 0; // storing the index of the id to be removed
+        for (int i = 0; i < containerSize; i++)
+        {
+            if (container[i].getEquipmentId() == id) {
+                index = i;
+                return 0;
+                break;
+            }
+            else if (i == containerSize - 1 && index == 0) {
+                std::cout << "No entry Found\n";
+                return -1;
+            }
+        }
+
+        int n = containerSize - 1;
+        Equipment* newArr = new Equipment[n];
+        for (int i = index; i < containerSize; i++)
+        {
+            Equipment temp = container[i];
+            container[i] = container[i + 1];
+            container[i + 1] = temp;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            newArr[i] = container[i];
+        }
+        containerSize = n - 1;
+        delete[] container;
+        container = newArr;
+        return 0;
+    }
+
+    int removeExercisePlan(ExercisePlan*& container, int containerSize, int id) {
+
+        int index = 0; // storing the index of the id to be removed
+        for (int i = 0; i < containerSize; i++)
+        {
+            if (container[i].getPlanId() == id) {
+                index = i;
+                return 0;
+                break;
+            }
+            else if (i == containerSize - 1 && index == 0) {
+                std::cout << "No entry Found\n";
+                return -1;
+            }
+        }
+
+        int n = containerSize - 1;
+        ExercisePlan* newArr = new ExercisePlan[n];
+        for (int i = index; i < containerSize; i++)
+        {
+            ExercisePlan temp = container[i];
+            container[i] = container[i + 1];
+            container[i + 1] = temp;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            newArr[i] = container[i];
+        }
+        containerSize = n - 1;
+        delete[] container;
+        container = newArr;
+        return 0;
+    }
+
+    int removeSubscription(Subscription*& container, int containerSize, int id) {
+
+        int index = 0; // storing the index of the id to be removed
+        for (int i = 0; i < containerSize; i++)
+        {
+            if (container[i].getSubId() == id) {
+                index = i;
+                return 0;
+                break;
+            }
+            else if (i == containerSize - 1 && index == 0) {
+                std::cout << "No entry Found\n";
+                return -1;
+            }
+        }
+
+        int n = containerSize - 1;
+        Subscription* newArr = new Subscription[n];
+        for (int i = index; i < containerSize; i++)
+        {
+            Subscription temp = container[i];
+            container[i] = container[i + 1];
+            container[i + 1] = temp;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            newArr[i] = container[i];
+        }
+        containerSize = n - 1;
+        delete[] container;
+        container = newArr;
+        return 0;
+    }
+
+    void menu() {
+        std::cout << "1. Add/Delete/Edit Trainer, Equipment, Customer & Plan\n";
+        std::cout << "2. Check Trainer Availability\n";
+        std::cout << "3. Enquire about customers Subscription, Gym Schedule, Trainer Schedule\n";
+        std::cout << "4. Exit\n";
+        std::cout << "----------------------------------------------------------------------\n";
+        std::cout << "Choice = ";
+    }
+
+    int menu(int choice) {
+        bool isRunning = true;
+
+        while (isRunning) {
+            if (choice == 1) {
+                return 1;
+            }
+            else if (choice == 2) {
+                return 2;
+            }
+            else if (choice == 3) {
+                return 3;
+            }
+            else if (choice == 4) {
+                return -1;
+            }
+        }
+        return 0;
+    }
+
+    int subMenu(int choice) {
+        bool isRunning = true;
+
+        while (isRunning) {
+            if (choice == 1) {
+                return 1;
+            }
+            else if (choice == 2) {
+                return 2;
+            }
+            else if (choice == 3) {
+                return 3;
+            }
+            else if (choice == 4) {
+                return 4;
+            }
+            else if (choice == 5) {
+                return 5;
+            }
+            else if (choice == 6) {
+                return 6;
+            }
+            else if (choice == 7) {
+                return 7;
+            }
+            else if (choice == 8) {
+                return 8;
+            }
+            else if (choice == 9) {
+                return 9;
+            }
+            else if (choice == 10) {
+                return 10;
+            }
+            else if (choice == 11) {
+                return 11;
+            }
+            else if (choice == 12) {
+                return 12;
+            }
+            else if (choice == 13) {
+                return 13;
+            }
+            else if (choice == 14) {
+                return 14;
+            }
+            else if (choice == 15) {
+                return 15;
+            }
+            else if (choice == 16) {
+                return 16;
+            }
+            else if (choice == 17) {
+                return 17;
+            }
+            else if (choice == 18) {
+                return 18;
+            }
+            else if (choice == 19) {
+                return -1;
+            }
+            else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    void loadCustomerFromFile(Customer*& c, int CustArraySize, int& i) {
         bool isRunning = true;
         int indexOfCustomer = 0;
         int choice;
@@ -603,17 +869,18 @@ class Gym{
             std::cout << "Error !" << std::endl;
         }
     }
-    void loadTrainersFromFile(Trainers *& t, int &sizeOfTrainers, int &indexOfTrainer){
+
+    void loadTrainersFromFile(Trainers*& t, int& sizeOfTrainers, int& indexOfTrainer) {
         std::ifstream dataRead;
         dataRead.open("Trainers.txt");
 
         int id = 0;
         int i = 0;
         std::string name;
-        if(dataRead.is_open()){
-            while (!dataRead.eof()){
+        if (dataRead.is_open()) {
+            while (!dataRead.eof()) {
                 dataRead >> id;
-                while(getline(dataRead, name)){
+                while (getline(dataRead, name)) {
                     break;
                 }
                 t[indexOfTrainer].setTrainerName(name);
@@ -636,15 +903,15 @@ class Gym{
         }
     }
 
-    void loadEquipmentsFromFile(Equipment *&e, int &sizeOfEquipments, int &indexOfEquipment){
+    void loadEquipmentsFromFile(Equipment*& e, int& sizeOfEquipments, int& indexOfEquipment) {
         std::ifstream dataReadOfEquipments;
         dataReadOfEquipments.open("Data/equipment.txt");
         int id = 0;
         std::string equipmentName;
-        if(dataReadOfEquipments.is_open()){
-            while (!dataReadOfEquipments.eof()){
+        if (dataReadOfEquipments.is_open()) {
+            while (!dataReadOfEquipments.eof()) {
                 dataReadOfEquipments >> id;
-                while(getline(dataReadOfEquipments, equipmentName)){
+                while (getline(dataReadOfEquipments, equipmentName)) {
                     break;
                 }
                 e[indexOfEquipment].setEquipmentName(equipmentName);
@@ -667,7 +934,7 @@ class Gym{
         }
     }
 
-    void loadExercisePlansFromFile(ExercisePlan*& ex ,int &sizeOfExercisePlan, int &indexOfPlan){
+    void loadExercisePlansFromFile(ExercisePlan*& ex, int& sizeOfExercisePlan, int& indexOfPlan) {
 
         std::ifstream PlanRead;
         PlanRead.open("Data/exercisePlans.txt");
@@ -675,8 +942,8 @@ class Gym{
         int trainerId = 0; int equipmentId = 0; int duration = 0;
         Trainers tr;
         Equipment eq;
-        if(PlanRead.is_open()){
-            while(!PlanRead.eof()){
+        if (PlanRead.is_open()) {
+            while (!PlanRead.eof()) {
                 PlanRead >> planId;
                 PlanRead >> equipmentId;
                 PlanRead >> trainerId;
@@ -696,13 +963,13 @@ class Gym{
         }
     }
 
-    void loadSubscriptionsFromFile(Subscription *&s, int sizeOfSubData, int &indexOfSub){
+    void loadSubscriptionsFromFile(Subscription*& s, int sizeOfSubData, int& indexOfSub) {
         int id, d, m, y, cusId, planId;
         std::ifstream loadSub;
         loadSub.open("Data/subscriptions.txt");
 
-        if(loadSub.is_open()){
-            while(!loadSub.eof()){
+        if (loadSub.is_open()) {
+            while (!loadSub.eof()) {
                 loadSub >> id >> d >> m >> y >> cusId >> planId;
                 Date date;
                 Customer c;
@@ -724,311 +991,9 @@ class Gym{
         {
             std::cout << "Error ! \n";
         }
+
     }
-
-    int removeDate(Date*& container, int containerSize, int FindDay, int FindMonth, int FindYear) {
-        int index = 0; // storing the index of the id to be removed
-        for (int i = 0; i < containerSize; i++)
-        {
-            if (container[i].getDay() == FindDay) {
-                if (container[i].getMonth() == FindMonth) {
-                    if (container[i].getYear() == FindYear) {
-                        index = i;
-                        return 0;
-                        break;
-                    }
-                }
-            }
-            else if(i == containerSize - 1 && index == 0){
-                std::cout << "No entry Found\n";
-                return -1;
-            }
-        }
-
-        int n = containerSize - 1;
-        Date* newArr = new Date[n];
-        for (int i = index; i < containerSize; i++)
-        {
-            Date temp = container[i];
-            container[i] = container[i + 1];
-            container[i + 1] = temp;
-        }
-        for (int i = 0; i < n; i++)
-        {
-            newArr[i] = container[i];
-        }
-        containerSize = n - 1;
-        delete[] container;
-        container = newArr;
-        return 0;
-    }
-
-    int removeCustomer(Customer*& container, int containerSize, int id) {
-        int index = 0; // storing the index of the id to be removed
-        for (int i = 0; i < containerSize; i++)
-        {
-            if(container[i].getCustomerId() == id){
-                index = i;
-                return 0;
-                break;
-            }
-            else if(i == containerSize - 1 && index == 0){
-                std::cout << "No entry Found\n";
-                return -1;
-            }
-        }
-
-        int n = containerSize - 1;
-        Customer* newArr = new Customer[n];
-        for (int i = index; i < containerSize; i++)
-        {
-            Customer temp = container[i];
-            container[i] = container[i + 1];
-            container[i + 1] = temp;
-        }
-        for (int i = 0; i < n; i++)
-        {
-            newArr[i] = container[i];
-        }
-        containerSize = n - 1;
-        delete[] container;
-        container = newArr;
-        return 0;
-    }
-
-    int removeTrainer(Trainers*& container, int containerSize, int id) {
-
-        int index = 0; // storing the index of the id to be removed
-        for (int i = 0; i < containerSize; i++)
-        {
-            if (container[i].getTrainerId() == id) {
-                index = i;
-                return 0;
-                break;
-            }
-            else if(i == containerSize - 1 && index == 0){
-                std::cout << "No entry Found\n";
-                return -1;
-            }
-        }
-
-        int n = containerSize - 1;
-        Trainers* newArr = new Trainers[n];
-        for (int i = index; i < containerSize; i++)
-        {
-            Trainers temp = container[i];
-            container[i] = container[i + 1];
-            container[i + 1] = temp;
-        }
-        for (int i = 0; i < n; i++)
-        {
-            newArr[i] = container[i];
-        }
-        containerSize = n - 1;
-        delete[] container;
-        container = newArr;
-        return 0;
-    }
-
-    int removeEquipment(Equipment*& container, int containerSize, int id) {
-
-        int index = 0; // storing the index of the id to be removed
-        for (int i = 0; i < containerSize; i++)
-        {
-            if (container[i].getEquipmentId() == id) {
-                index = i;
-                return 0;
-                break;
-            }
-            else if(i == containerSize - 1 && index == 0){
-                std::cout << "No entry Found\n";
-                return -1;
-            }
-        }
-        
-        int n = containerSize - 1;
-        Equipment* newArr = new Equipment[n];
-        for (int i = index; i < containerSize; i++)
-        {
-            Equipment temp = container[i];
-            container[i] = container[i + 1];
-            container[i + 1] = temp;
-        }
-        for (int i = 0; i < n; i++)
-        {
-            newArr[i] = container[i];
-        }
-        containerSize = n - 1;
-        delete[] container;
-        container = newArr;
-        return 0;
-    }
-
-    int removeExercisePlan(ExercisePlan*& container, int containerSize, int id) {
-
-        int index = 0; // storing the index of the id to be removed
-        for (int i = 0; i < containerSize; i++)
-        {
-            if (container[i].getPlanId() == id) {
-                index = i;
-                return 0;
-                break;
-            }
-            else if(i == containerSize - 1 && index == 0){
-                std::cout << "No entry Found\n";
-                return -1;
-            }
-        }
-        
-        int n = containerSize - 1;
-        ExercisePlan* newArr = new ExercisePlan[n];
-        for (int i = index; i < containerSize; i++)
-        {
-            ExercisePlan temp = container[i];
-            container[i] = container[i + 1];
-            container[i + 1] = temp;
-        }
-        for (int i = 0; i < n; i++)
-        {
-            newArr[i] = container[i];
-        }
-        containerSize = n - 1;
-        delete[] container;
-        container = newArr;
-        return 0;
-    }
-
-    int removeSubscription(Subscription*& container, int containerSize, int id) {
-
-        int index = 0; // storing the index of the id to be removed
-        for (int i = 0; i < containerSize; i++)
-        {
-            if (container[i].getSubId() == id) {
-                index = i;
-                return 0;
-                break;
-            }
-            else if(i == containerSize - 1 && index == 0){
-                std::cout << "No entry Found\n";
-                return -1;
-            }
-        }
-        
-        int n = containerSize - 1;
-        Subscription* newArr = new Subscription[n];
-        for (int i = index; i < containerSize; i++)
-        {
-            Subscription temp = container[i];
-            container[i] = container[i + 1];
-            container[i + 1] = temp;
-        }
-        for (int i = 0; i < n; i++)
-        {
-            newArr[i] = container[i];
-        }
-        containerSize = n - 1;
-        delete[] container;
-        container = newArr;
-        return 0;
-    }
-
-    void menu(){
-        std::cout << "1. Add/Delete/Edit Trainer, Equipment, Customer & Plan\n";
-        std::cout << "2. Check Trainer Availability\n";
-        std::cout << "3. Enquire about customers Subscription, Gym Schedule, Trainer Schedule\n";
-        std::cout << "4. Exit\n";
-        std::cout << "----------------------------------------------------------------------\n";
-        std::cout << "Choice = ";
-    }
-
-    int menu(int choice){
-        bool isRunning = true;
-
-        while(isRunning){
-            if(choice == 1){
-                return 1;
-            }
-            else if(choice == 2){
-                return 2;
-            }
-            else if(choice == 3){
-                return 3;
-            }
-            else if(choice == 4){
-                return -1;
-            }
-        }
-        return 0;
-    }
-
-    int subMenu(int choice){
-        bool isRunning = true;
-
-        while(isRunning){
-            if(choice == 1){
-                return 1;
-            }
-            else if(choice == 2){
-                return 2;
-            }
-            else if(choice == 3){
-                return 3;
-            }
-            else if(choice == 4){
-                return 4;
-            }
-            else if(choice == 5){
-                return 5;
-            }
-            else if(choice == 6){
-                return 6;
-            }
-            else if(choice == 7){
-                return 7;
-            }
-            else if(choice == 8){
-                return 8;
-            }
-            else if(choice == 9){
-                return 9;
-            }
-            else if(choice == 10){
-                return 10;
-            }
-            else if(choice == 11){
-                return 11;
-            }
-            else if(choice == 12){
-                return 12;
-            }
-            else if(choice == 13){
-                return 13;
-            }
-            else if(choice == 14){
-                return 14;
-            }
-            else if(choice == 15){
-                return 15;
-            }
-            else if(choice == 16){
-                return 16;
-            }
-            else if(choice == 17){
-                return 17;
-            }
-            else if(choice == 18){
-                return 18;
-            }
-            else if(choice == 19){
-                return -1;
-            }
-            else{
-                return 0;
-            }
-        }
-        return 0;
-    }
-    void SubMenu(){
+    void SubMenu() {
         std::cout << "------ D A T E -------\n";
         std::cout << "1. Add Date\n";
         std::cout << "2. Edit Date\n";
@@ -1058,55 +1023,122 @@ class Gym{
         std::cout << "Choice = ";
     }
 
-    void runGym(){
-        init();
+    bool checkTrainerAvailability(ExercisePlan*& _e, int trainerId, int arraySize) {
+        bool check = false;
+        for (int i = 0; i < arraySize; i++)
+        {
+            if (_e[i]._getTrainerId() == trainerId) {
+                check = true;
+                return false;
+                break;
+            }
+            else if (i == arraySize - 1 && check == false) {
+                return true;
+            }
+        }
+        return true;
+    }
+
+    bool checkEquipmentAvailability(ExercisePlan*& _e, int eqId, int arraySize) {
+        bool check = false;
+        for (int i = 0; i < arraySize; i++)
+        {
+            if (_e[i]._getEquipmentId() == eqId) {
+                return false;
+                check = true;
+                break;
+            }
+            else if (i == arraySize - 1 && check == false) {
+                return true;
+            }
+        }
+        return true;
+    }
+
+    void runGymProgram() {
+        int dateArraySize = 1;
+        Date* dateArray = new Date[dateArraySize];
+        int dateIndex = 0;
+
+        int customerArraySize = 1;
+        Customer* customerArray = new Customer[customerArraySize];
+        int customerIndex = 0;
+
+        int trainerArraySize = 1;
+        Trainers* trainerArray = new Trainers[trainerArraySize];
+        int trainerIndex = 0;
+
+        int equipmentArraySize = 1;
+        Equipment* equipmentArray = new Equipment[equipmentArraySize];
+        int equipmentIndex = 0;
+
+        int exercisePlanArraySize = 1;
+        ExercisePlan* exercisePlanArray = new ExercisePlan[exercisePlanArraySize];
+        int exercisePlanIndex = 0;
+
+        int subscriptionArraySize = 1;
+        Subscription* subscriptionArray = new Subscription[subscriptionArraySize];
+        int subscriptionIndex = 0;
+
+
+        //Loading Data from Files
+        std::cout << "\n";
+        std::cout << "------------- D A T A - F R O M - F I L E S ------------------\n";
+        loadCustomerFromFile(customerArray, customerArraySize, customerIndex);
+        loadTrainersFromFile(trainerArray, trainerArraySize, trainerIndex);
+        loadEquipmentsFromFile(equipmentArray, equipmentArraySize, equipmentIndex);
+        loadExercisePlansFromFile(exercisePlanArray, exercisePlanArraySize, exercisePlanIndex);
+        loadSubscriptionsFromFile(subscriptionArray, subscriptionArraySize, subscriptionIndex);
+        std::cout << "-------------------------------------------------------------\n";
+
+
         int usrChoice = 0;
         bool isRunning = true;
         bool subMenuRunning = true;
-        while(isRunning){
+        while (isRunning) {
             menu();
             std::cin >> usrChoice;
-            if(menu(usrChoice) == 1){
+            if (menu(usrChoice) == 1) {
                 subMenuRunning = true;
-                while(subMenuRunning)
+                while (subMenuRunning)
                 {
                     SubMenu();
                     std::cin >> usrChoice;
-                    if(subMenu(usrChoice == 1)){
+                    if (subMenu(usrChoice == 1)) {
                         dateArray[dateIndex].userInput();
                         dateIndex++;
                         dateArraySize++;
                         increaseSize<Date>(dateArray, dateArraySize);
                         std::cout << "1 new Date Added Successfully\n";
                     }
-                    else if(subMenu(usrChoice) == 3){
+                    else if (subMenu(usrChoice) == 3) {
                         bool _operationComplete = true;
-                        while(_operationComplete){  
-                            int da,m,y;
+                        while (_operationComplete) {
+                            int da, m, y;
                             std::cout << "Enter day,month,year = ";
                             std::cin >> da >> m >> y;
                             removeDate(dateArray, dateArraySize, da, m, y);
                             dateArraySize--;
-                            if(removeDate(dateArray, dateArraySize, da, m, y) != -1){
+                            if (removeDate(dateArray, dateArraySize, da, m, y) != -1) {
                                 std::cout << "Date Deleted Successfully\n";
                                 _operationComplete = false;
                             }
                         }
                     }
-                    else if(subMenu(usrChoice) == 2){
+                    else if (subMenu(usrChoice) == 2) {
                         int editIndex = 0;
                         std::cout << "Enter the Date index you want to edit\nIndex = ";
                         std::cin >> editIndex;
                         Date temp;
                         temp.userInput();
-                        if(editIndex < dateIndex || editIndex <= dateIndex){
+                        if (editIndex < dateIndex || editIndex <= dateIndex) {
                             dateArray[editIndex].editDate(temp);
                         }
-                        else{
+                        else {
                             std::cout << "Invalid Entry\n";
                         }
                     }
-                    else if(subMenu(usrChoice) == 4){
+                    else if (subMenu(usrChoice) == 4) {
                         customerArray[customerIndex].userInput();
                         customerArraySize++;
                         customerIndex++;
@@ -1115,52 +1147,52 @@ class Gym{
                         {
                             temp[i] = customerArray[i];
                         }
-                        delete [] customerArray;
-                        customerArray = temp;                                
+                        delete[] customerArray;
+                        customerArray = temp;
                         std::cout << "1 Customer added successfully\n";
                     }
-                    else if(subMenu(usrChoice) == 5){
+                    else if (subMenu(usrChoice) == 5) {
                         int id = 0;
                         bool isFound = false;
                         int index = 0;
                         std::cout << "Enter the Customer ID you want to edit\nId = ";
                         std::cin >> id;
-                        for (int i = 0; i < customerArraySize; i++){
-                            if(customerArray[i].getCustomerId() == id){
+                        for (int i = 0; i < customerArraySize; i++) {
+                            if (customerArray[i].getCustomerId() == id) {
                                 isFound = true;
                                 std::cout << "Data Found\n";
                                 index = i;
                                 break;
                             }
-                            else if(i == customerArraySize - 1 && index == 0){
+                            else if (i == customerArraySize - 1 && index == 0) {
                                 std::cout << "No id found\n";
                             }
                         }
-                        if(isFound){
+                        if (isFound) {
                             Customer temp;
                             temp.userInput();
                             customerArray[index].editCustomer(temp);
                             std::cout << "Customer Edited Successfully\n";
                         }
                     }
-                    else if(subMenu(usrChoice) == 6){
+                    else if (subMenu(usrChoice) == 6) {
                         bool _operationComplete = true;
-                        while(_operationComplete){  
+                        while (_operationComplete) {
                             int id;
                             std::cout << "Enter id of Customer you want to Delete = ";
                             std::cin >> id;
-                            removeCustomer(customerArray, customerArraySize,id);
+                            removeCustomer(customerArray, customerArraySize, id);
                             customerArraySize--;
-                            if(removeCustomer(customerArray, customerArraySize,id) != -1){
+                            if (removeCustomer(customerArray, customerArraySize, id) != -1) {
                                 std::cout << "Customer Deleted Successfully\n";
                                 _operationComplete = false;
                             }
-                            else{
+                            else {
                                 std::cout << "Enter Valid Id\n";
                             }
                         }
                     }
-                    else if(subMenu(usrChoice) == 7){
+                    else if (subMenu(usrChoice) == 7) {
                         trainerArray[trainerIndex].inputData();
                         trainerArraySize++;
                         trainerIndex++;
@@ -1169,52 +1201,52 @@ class Gym{
                         {
                             temp[i] = trainerArray[i];
                         }
-                        delete [] trainerArray;
+                        delete[] trainerArray;
                         trainerArray = temp;
                         std::cout << "1 Trainers added successfully\n";
                     }
-                    else if(subMenu(usrChoice) == 8){
+                    else if (subMenu(usrChoice) == 8) {
                         int id = 0;
                         bool isFound = false;
                         int index = 0;
                         std::cout << "Enter the Trainer ID you want to edit\nId = ";
                         std::cin >> id;
-                        for (int i = 0; i < trainerArraySize; i++){
-                            if(trainerArray[i].getTrainerId() == id){
+                        for (int i = 0; i < trainerArraySize; i++) {
+                            if (trainerArray[i].getTrainerId() == id) {
                                 isFound = true;
                                 std::cout << "Data Found\n";
                                 index = i;
                                 break;
                             }
-                            else if(i == trainerArraySize - 1 && index == 0){
+                            else if (i == trainerArraySize - 1 && index == 0) {
                                 std::cout << "No id found\n";
                             }
                         }
-                        if(isFound){
+                        if (isFound) {
                             Trainers temp;
                             temp.inputData();
                             trainerArray[index].editTrainer(temp);
                             std::cout << "Trainer Edited Successfully\n";
                         }
                     }
-                    else if(subMenu(usrChoice) == 9){
+                    else if (subMenu(usrChoice) == 9) {
                         bool _operationComplete = true;
-                        while(_operationComplete){  
+                        while (_operationComplete) {
                             int id;
                             std::cout << "Enter id of Trainer you want to Delete = ";
                             std::cin >> id;
-                            removeTrainer(trainerArray, trainerArraySize,id);
+                            removeTrainer(trainerArray, trainerArraySize, id);
                             trainerArraySize--;
-                            if(removeTrainer(trainerArray, trainerArraySize,id) != -1){
+                            if (removeTrainer(trainerArray, trainerArraySize, id) != -1) {
                                 std::cout << "Trainer Deleted Successfully\n";
                                 _operationComplete = false;
                             }
-                            else{
+                            else {
                                 std::cout << "Enter Valid Id\n";
                             }
                         }
                     }
-                    else if(subMenu(usrChoice) == 10){
+                    else if (subMenu(usrChoice) == 10) {
                         equipmentArray[trainerIndex].inputData();
                         equipmentArraySize++;
                         equipmentIndex++;
@@ -1223,52 +1255,52 @@ class Gym{
                         {
                             temp[i] = equipmentArray[i];
                         }
-                        delete [] equipmentArray;
+                        delete[] equipmentArray;
                         equipmentArray = temp;
                         std::cout << "1 Equipment added successfully\n";
                     }
-                    else if(subMenu(usrChoice) == 11){
+                    else if (subMenu(usrChoice) == 11) {
                         int id = 0;
                         bool isFound = false;
                         int index = 0;
                         std::cout << "Enter the Equipment ID you want to edit\nId = ";
                         std::cin >> id;
-                        for (int i = 0; i < equipmentArraySize; i++){
-                            if(equipmentArray[i].getEquipmentId() == id){
+                        for (int i = 0; i < equipmentArraySize; i++) {
+                            if (equipmentArray[i].getEquipmentId() == id) {
                                 isFound = true;
                                 std::cout << "Data Found\n";
                                 index = i;
                                 break;
                             }
-                            else if(i == equipmentArraySize - 1 && index == 0){
+                            else if (i == equipmentArraySize - 1 && index == 0) {
                                 std::cout << "No id found\n";
                             }
                         }
-                        if(isFound){
+                        if (isFound) {
                             Equipment temp;
                             temp.inputData();
                             equipmentArray[index].editEquipment(temp);
                             std::cout << "Equipment Edited Successfully\n";
                         }
                     }
-                    else if(subMenu(usrChoice) == 12){
+                    else if (subMenu(usrChoice) == 12) {
                         bool _operationComplete = true;
-                        while(_operationComplete){  
+                        while (_operationComplete) {
                             int id;
                             std::cout << "Enter id of Equipment you want to Delete = ";
                             std::cin >> id;
-                            removeEquipment(equipmentArray, equipmentArraySize,id);
+                            removeEquipment(equipmentArray, equipmentArraySize, id);
                             equipmentArraySize--;
-                            if(removeEquipment(equipmentArray, equipmentArraySize,id) != -1){
+                            if (removeEquipment(equipmentArray, equipmentArraySize, id) != -1) {
                                 std::cout << "Equipment Deleted Successfully\n";
                                 _operationComplete = false;
                             }
-                            else{
+                            else {
                                 std::cout << "Enter Valid Id\n";
                             }
                         }
                     }
-                    else if(subMenu(usrChoice) == 13){
+                    else if (subMenu(usrChoice) == 13) {
                         exercisePlanArray[exercisePlanIndex].inputData();
                         exercisePlanArraySize++;
                         exercisePlanIndex++;
@@ -1277,52 +1309,52 @@ class Gym{
                         {
                             temp[i] = exercisePlanArray[i];
                         }
-                        delete [] exercisePlanArray;
+                        delete[] exercisePlanArray;
                         exercisePlanArray = temp;
                         std::cout << "1 ExercisePlan added successfully\n";
                     }
-                    else if(subMenu(usrChoice) == 14){
+                    else if (subMenu(usrChoice) == 14) {
                         int id = 0;
                         bool isFound = false;
                         int index = 0;
                         std::cout << "Enter the Exercise Plan ID you want to edit\nId = ";
                         std::cin >> id;
-                        for (int i = 0; i < exercisePlanArraySize; i++){
-                            if(exercisePlanArray[i].getPlanId() == id){
+                        for (int i = 0; i < exercisePlanArraySize; i++) {
+                            if (exercisePlanArray[i].getPlanId() == id) {
                                 isFound = true;
                                 std::cout << "Data Found\n";
                                 index = i;
                                 break;
                             }
-                            else if(i == exercisePlanArraySize - 1 && index == 0){
+                            else if (i == exercisePlanArraySize - 1 && index == 0) {
                                 std::cout << "No id found\n";
                             }
                         }
-                        if(isFound){
+                        if (isFound) {
                             ExercisePlan temp;
                             temp.inputData();
                             exercisePlanArray[index].editExercisePlan(temp);
                             std::cout << "Exercise Plan Edited Successfully\n";
                         }
                     }
-                    else if(subMenu(usrChoice) == 15){
+                    else if (subMenu(usrChoice) == 15) {
                         bool _operationComplete = true;
-                        while(_operationComplete){  
+                        while (_operationComplete) {
                             int id;
                             std::cout << "Enter id of Plan you want to Delete = ";
                             std::cin >> id;
-                            removeExercisePlan(exercisePlanArray, exercisePlanArraySize,id);
+                            removeExercisePlan(exercisePlanArray, exercisePlanArraySize, id);
                             exercisePlanArraySize--;
-                            if(removeExercisePlan(exercisePlanArray, exercisePlanArraySize,id) != -1){
+                            if (removeExercisePlan(exercisePlanArray, exercisePlanArraySize, id) != -1) {
                                 std::cout << "Exercise Plan Deleted Successfully\n";
                                 _operationComplete = false;
                             }
-                            else{
+                            else {
                                 std::cout << "Enter Valid Id\n";
                             }
                         }
                     }
-                    else if(subMenu(usrChoice) == 16){
+                    else if (subMenu(usrChoice) == 16) {
                         subscriptionArray[subscriptionIndex].inputData();
                         subscriptionArraySize++;
                         exercisePlanIndex++;
@@ -1331,79 +1363,93 @@ class Gym{
                         {
                             temp[i] = subscriptionArray[i];
                         }
-                        delete [] subscriptionArray;
+                        delete[] subscriptionArray;
                         subscriptionArray = temp;
                         std::cout << "1 Subscription added successfully\n";
                     }
-                    else if(subMenu(usrChoice) == 17){
+                    else if (subMenu(usrChoice) == 17) {
                         int id = 0;
                         bool isFound = false;
                         int index = 0;
                         std::cout << "Enter the Exercise Plan ID you want to edit\nId = ";
                         std::cin >> id;
-                        for (int i = 0; i < subscriptionArraySize; i++){
-                            if(subscriptionArray[i].getPlanId() == id){
+                        for (int i = 0; i < subscriptionArraySize; i++) {
+                            if (subscriptionArray[i].getPlanId() == id) {
                                 isFound = true;
                                 std::cout << "Data Found\n";
                                 index = i;
                                 break;
                             }
-                            else if(i == subscriptionArraySize - 1 && index == 0){
+                            else if (i == subscriptionArraySize - 1 && index == 0) {
                                 std::cout << "No id found\n";
                             }
                         }
-                        if(isFound){
+                        if (isFound) {
                             Subscription temp;
                             temp.inputData();
                             subscriptionArray[index].editSubscription(temp);
                             std::cout << "Subscription Edited Successfully\n";
                         }
                     }
-                    else if(subMenu(usrChoice) == 18){
+                    else if (subMenu(usrChoice) == 18) {
                         bool _operationComplete = true;
-                        while(_operationComplete){  
+                        while (_operationComplete) {
                             int id;
                             std::cout << "Enter id of Plan you want to Delete = ";
                             std::cin >> id;
-                            removeSubscription(subscriptionArray, subscriptionArraySize,id);
+                            removeSubscription(subscriptionArray, subscriptionArraySize, id);
                             subscriptionArraySize--;
-                            if(removeSubscription(subscriptionArray, subscriptionArraySize,id) != -1){
+                            if (removeSubscription(subscriptionArray, subscriptionArraySize, id) != -1) {
                                 std::cout << "Subscription Deleted Successfully\n";
                                 _operationComplete = false;
                             }
-                            else{
+                            else {
                                 std::cout << "Enter Valid Id\n";
                             }
                         }
                     }
-                    else if(subMenu(usrChoice) == -1){
+                    else if (subMenu(usrChoice) == -1) {
                         subMenuRunning = false;
                     }
                 }
             }
-            else if(menu(usrChoice) == -1){
+            else if (menu(usrChoice) == 2) {
+                int _trId;
+                int _eqId;
+                std::cout << "Enter the Trainer you want to use = ";
+                std::cin >> _trId;
+                std::cout << "Enter Equipment id you want to use = ";
+                std::cin >> _eqId;
+                if (checkTrainerAvailability(exercisePlanArray, exercisePlanArraySize, _trId) == false) {
+                    if (checkEquipmentAvailability(exercisePlanArray, exercisePlanArraySize, _eqId) == false) {
+                        std::cout << "Both are Available\n";
+                    }
+                    else {
+                        std::cout << "Trainer Available but Equipment not Available\n";
+                    }
+                }
+                else if (checkEquipmentAvailability(exercisePlanArray, exercisePlanArraySize, _eqId) == false) {
+                    std::cout << "Equipment Available \n";
+                }
+                else {
+                    std::cout << "Both Trainer and Equipment are booked\n";
+                }
+            }
+            else if(menu(usrChoice) == 3){
+                for (int i = 0; i < exercisePlanArraySize -  1; i++)
+                {
+                    exercisePlanArray[i].printPlan();
+                }
+                
+            }
+            else if (menu(usrChoice) == -1) {
                 isRunning = false;
             }
         }
     }
-    template <typename T>
-    void increaseSize(T*& oldArr, int& oldSize) {
-        int newSize = oldSize;
-        T* temp = nullptr;
-        temp = new T[newSize];
-        for (int i = 0; i < oldSize; i++)
-        {
-            temp[i] = oldArr[i];
-        }
-        oldSize = newSize;
-        delete[] oldArr;
-        oldArr = temp;
-    }
-
 };
 
-int main(){
-    Gym gymSoftware;
-    gymSoftware.runGym();
-    return 0;
+int main() {
+    Gym gym1;
+    gym1.runGymProgram();
 }
