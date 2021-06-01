@@ -19,9 +19,8 @@ public:
     unsigned int getYear();
     void operator =(Date& d);
     void userInput();
-    Date editDate(Date &d){
+    void editDate(Date &d){
         setDate(d.getDay(), d.getMonth(), d.getYear());
-        return *this;
     }
 };
 
@@ -421,6 +420,8 @@ void Subscription::operator=(Subscription &_s){
 }
 
 
+
+
 //Functions for Program
 template <typename T>
 void increaseSize(T*& oldArr, int& oldSize) {
@@ -437,18 +438,23 @@ void increaseSize(T*& oldArr, int& oldSize) {
 }
 
 
-void removeDate(Date*& container, int containerSize, int FindDay, int FindMonth, int FindYear) {
+int removeDate(Date*& container, int containerSize, int FindDay, int FindMonth, int FindYear) {
 
-    int index; // storing the index of the key to be removed
+    int index = 0; // storing the index of the key to be removed
     for (int i = 0; i < containerSize; i++)
     {
         if (container[i].getDay() == FindDay) {
             if (container[i].getMonth() == FindMonth) {
                 if (container[i].getYear() == FindYear) {
                     index = i;
+                    return 0;
                     break;
                 }
             }
+        }
+        else if(i == containerSize - 1 && index == 0){
+            std::cout << "No entry Found\n";
+            return -1;
         }
     }
 
@@ -467,9 +473,133 @@ void removeDate(Date*& container, int containerSize, int FindDay, int FindMonth,
     containerSize = n - 1;
     delete[] container;
     container = newArr;
+    return 0;
+}
+
+void menu(){
+    std::cout << "1. Add/Delete/Edit Trainer, Equipment, Customer & Plan\n";
+    std::cout << "2. Check Trainer Availability\n";
+    std::cout << "3. Enquire about customers Subscription, Gym Schedule, Trainer Schedule\n";
+    std::cout << "4. Exit\n";
+    std::cout << "----------------------------------------------------------------------\n";
+    std::cout << "Choice = ";
+}
+
+int menu(int choice){
+    bool isRunning = true;
+
+    while(isRunning){
+        if(choice == 1){
+            return 1;
+        }
+        else if(choice == 2){
+            return 2;
+        }
+        else if(choice == 3){
+            return 3;
+        }
+        else if(choice == 4){
+            return -1;
+        }
+    }
+    return 0;
+}
+
+int subMenu(int choice){
+    bool isRunning = true;
+
+    while(isRunning){
+        if(choice == 1){
+            return 1;
+        }
+        else if(choice == 2){
+            return 2;
+        }
+        else if(choice == 3){
+            return 3;
+        }
+        else if(choice == 4){
+            return 4;
+        }
+        else if(choice == 5){
+            return 5;
+        }
+        else if(choice == 6){
+            return 6;
+        }
+        else if(choice == 7){
+            return 7;
+        }
+        else if(choice == 8){
+            return 8;
+        }
+        else if(choice == 9){
+            return 9;
+        }
+        else if(choice == 10){
+            return 10;
+        }
+        else if(choice == 11){
+            return 11;
+        }
+        else if(choice == 12){
+            return 12;
+        }
+        else if(choice == 13){
+            return 13;
+        }
+        else if(choice == 14){
+            return 14;
+        }
+        else if(choice == 15){
+            return 15;
+        }
+        else if(choice == 16){
+            return -1;
+        }
+        else{
+            return 0;
+        }
+    }
+    return 0;
+}
+
+void SubMenu(){
+    std::cout << "------ D A T E -------\n";
+    std::cout << "1. Add Date\n";
+    std::cout << "2. Edit Date\n";
+    std::cout << "3. Delete Date\n";
+    std::cout << "------ C U S T O M E R -------\n";
+    std::cout << "4. Add Customer\n";
+    std::cout << "5. Edit Customer\n";
+    std::cout << "6. Delete Customer\n";
+    std::cout << "------ T R A I N E R -------\n";
+    std::cout << "7. Add Trainer\n";
+    std::cout << "8. Edit Trainer\n";
+    std::cout << "9. Delete Trainer\n";
+    std::cout << "------ E X E R C I S E - P L A N S -------\n";
+    std::cout << "10. Add Exerxise Plan\n";
+    std::cout << "11. Edit Exerxise Plan\n";
+    std::cout << "12. Delete Exerxise Plan\n";
+    std::cout << "------ S U B S C R I P T I O N -------\n";
+    std::cout << "13. Add Subscription\n";
+    std::cout << "14. Edit Subscription\n";
+    std::cout << "15. Delete Subscription\n";
+    std::cout << "16. Go Back\n";
+    std::cout << "----------------------------------------------------------------------\n";
+    std::cout << "Choice = ";
 }
 
 int main() {
+
+
+    int dateArraySize = 1;
+    Date *dateArray = new Date[dateArraySize];
+    int dateIndex = 0;
+
+
+
+
     // int dateArraySize = 1;
     // Date *d = new Date[dateArraySize];
     // bool isRunning = true;
@@ -516,20 +646,14 @@ int main() {
 
     // isRunning = true;
 
-    // while(isRunning){
-    //     std::cout << "Do you want to remove a date ";
-    //     std::cin >> choice;
-
-    //     if(choice == 1){
-    //         int da,m,y;
-    //         std::cout << "Enter day,month,year = ";
-    //         std::cin >> da >> m >> y;
-    //         removeDate(d, dateArraySize, da, m, y);
-    //         dateArraySize--;
-    //     }
-    //     else{
-    //         isRunning = false;
-    //     }
+    // bool _operationComplete = true;
+    // while(_operationComplete){  
+    //     int da,m,y;
+    //     std::cout << "Enter day,month,year = ";
+    //     std::cin >> da >> m >> y;
+    //     removeDate(d, dateArraySize, da, m, y);
+    //     dateArraySize--;
+    //     _operationComplete = false;
     // }
 
     // for (int i = 0; i < dateArraySize; i++)
@@ -683,36 +807,80 @@ int main() {
     //     ex[i].printPlan();
     // }
 
-    int sizeOfSubData = 1;
-    Subscription *s = new Subscription[sizeOfSubData];
-    int indexOfSub = 0;
+    // int sizeOfSubData = 1;
+    // Subscription *s = new Subscription[sizeOfSubData];
+    // int indexOfSub = 0;
 
-    int id, d, m, y, cusId, planId;
+    // int id, d, m, y, cusId, planId;
 
-    std::ifstream loadSub;
-    loadSub.open("Data/subscriptions.txt");
+    // std::ifstream loadSub;
+    // loadSub.open("Data/subscriptions.txt");
 
-    if(loadSub.is_open()){
-        while(!loadSub.eof()){
-            loadSub >> id >> d >> m >> y >> cusId >> planId;
-            Date date;
-            Customer c;
-            ExercisePlan ex;
-            date.setDate(d, m, y);
-            c.setCustomerId(cusId);
-            ex.setExercisePlanId(planId);
-            s[indexOfSub].setIdOfSubscription(id);
-            s[indexOfSub].setCustomerId(c);
-            s[indexOfSub].setDate(date);
-            s[indexOfSub].setExercisePlanId(ex);
-            indexOfSub++;
-            sizeOfSubData++;
-            increaseSize<Subscription>(s, sizeOfSubData);
+    // if(loadSub.is_open()){
+    //     while(!loadSub.eof()){
+    //         loadSub >> id >> d >> m >> y >> cusId >> planId;
+    //         Date date;
+    //         Customer c;
+    //         ExercisePlan ex;
+    //         date.setDate(d, m, y);
+    //         c.setCustomerId(cusId);
+    //         ex.setExercisePlanId(planId);
+    //         s[indexOfSub].setIdOfSubscription(id);
+    //         s[indexOfSub].setCustomerId(c);
+    //         s[indexOfSub].setDate(date);
+    //         s[indexOfSub].setExercisePlanId(ex);
+    //         indexOfSub++;
+    //         sizeOfSubData++;
+    //         increaseSize<Subscription>(s, sizeOfSubData);
+    //     }
+    // }
+    // for (int i = 0; i < sizeOfSubData - 1; i++)
+    // {
+    //     s[i].printData();
+    // }
+
+    int usrChoice = 0;
+    bool isRunning = true;
+    while(isRunning){
+        menu();
+        std::cin >> usrChoice;
+        if(menu(usrChoice) == 1){
+            SubMenu();
+            std::cin >> usrChoice;
+            if(subMenu(usrChoice == 1)){
+                dateArray[dateIndex].userInput();
+                dateIndex++;
+                dateArraySize++;
+                increaseSize<Date>(dateArray, dateArraySize);
+                std::cout << "1 new Date Added Successfully\n";
+            }
+            else if(subMenu(usrChoice) == 3){
+                bool _operationComplete = true;
+                while(_operationComplete){  
+                    int da,m,y;
+                    std::cout << "Enter day,month,year = ";
+                    std::cin >> da >> m >> y;
+                    removeDate(dateArray, dateArraySize, da, m, y);
+                    dateArraySize--;
+                    if(removeDate(dateArray, dateArraySize, da, m, y) != -1){
+                        std::cout << "Date Deleted Successfully\n";
+                        _operationComplete = false;
+                    }
+                }
+            }
+            else if(subMenu(usrChoice) == 2){
+                int editIndex = 0;
+                std::cout << "Enter the Date index you want to edit\nIndex = ";
+                std::cin >> editIndex;
+                Date temp;
+                temp.userInput();
+                if(editIndex < dateIndex || editIndex <= dateIndex){
+                    dateArray[editIndex].editDate(temp);
+                }
+                else{
+                    std::cout << "Invalid Entry\n";
+                }
+            }
         }
     }
-    for (int i = 0; i < sizeOfSubData - 1; i++)
-    {
-        s[i].printData();
-    }
-    
 }
