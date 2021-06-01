@@ -19,6 +19,10 @@ public:
     unsigned int getYear();
     void operator =(Date& d);
     void userInput();
+    Date editDate(Date &d){
+        setDate(d.getDay(), d.getMonth(), d.getYear());
+        return *this;
+    }
 };
 
 //Date Driver Data
@@ -70,6 +74,7 @@ void Date::userInput() {
     std::cin >> y;
     setDate(d, m, y);
 }
+
 
 //Customer Class
 class Customer {
@@ -342,7 +347,7 @@ void ExercisePlan::operator =(ExercisePlan &_plan){
 }
 
 //Subscription Class
-class Subscribtion {
+class Subscription {
 protected:
     int subId;
     Date subDate;
@@ -350,8 +355,8 @@ protected:
     Customer customerId;
 
 public:
-    Subscribtion();
-    Subscribtion(int id, Date date, ExercisePlan plan, Customer cId);
+    Subscription();
+    Subscription(int id, Date date, ExercisePlan plan, Customer cId);
     void setIdOfSubscription(int d);
     void setDate(Date d);
     void setExercisePlanId(ExercisePlan planId);
@@ -361,50 +366,58 @@ public:
     std::string getDate();
     int getPlanId();
     int getCustomerId();
+    void operator =(Subscription &_s);
 };
 
 //Subscription Driver Data
 
-Subscribtion::Subscribtion() {
+Subscription::Subscription() {
     subId = 0;
 }
 
-Subscribtion::Subscribtion(int id, Date date, ExercisePlan plan, Customer cId) {
+Subscription::Subscription(int id, Date date, ExercisePlan plan, Customer cId) {
     subId = id;
     subDate.setDate(date.getDay(), date.getMonth(), date.getYear());
     exercisePlanId.setExercisePlanId(plan.getPlanId());
     customerId.setCustomerId(cId.getCustomerId());
 }
 
-void Subscribtion::setIdOfSubscription(int d) {
+void Subscription::setIdOfSubscription(int d) {
     subId = d;
 }
-void Subscribtion::setDate(Date d) {
+void Subscription::setDate(Date d) {
     subDate.setDate(d.getDay(), d.getMonth(), d.getYear());
 }
-void Subscribtion::setExercisePlanId(ExercisePlan planId) {
+void Subscription::setExercisePlanId(ExercisePlan planId) {
     exercisePlanId.setExercisePlanId(planId.getPlanId());
 }
-void Subscribtion::setCustomerId(Customer id) {
+void Subscription::setCustomerId(Customer id) {
     customerId.setCustomerId(id.getCustomerId());
 }
 
-int Subscribtion::getSubId() {
+int Subscription::getSubId() {
     return subId;
 }
-std::string Subscribtion::getDate() {
+std::string Subscription::getDate() {
     std::string date = std::to_string(subDate.getDay()) + "/" + std::to_string(subDate.getMonth()) + "/" + std::to_string(subDate.getYear());
     return date;
 }
-int Subscribtion::getPlanId() {
+int Subscription::getPlanId() {
     return exercisePlanId.getPlanId();
 }
-int Subscribtion::getCustomerId() {
+int Subscription::getCustomerId() {
     return customerId.getCustomerId();
 }
 
-void Subscribtion::printData() {
+void Subscription::printData() {
     std::cout << getSubId() << " " << getDate() << " " << getPlanId() << " " << getCustomerId() << std::endl;
+}
+
+void Subscription::operator=(Subscription &_s){
+    subId = _s.getSubId();
+    subDate.setDate(_s.subDate.getDay(), _s.subDate.getMonth(), _s.subDate.getYear());
+    exercisePlanId.setExercisePlanId(_s.getPlanId());
+    customerId.setCustomerId(_s.getCustomerId());
 }
 
 
@@ -638,35 +651,68 @@ int main() {
     //     std::cout << "Error ! \n";
     // }
 
-    int sizeOfExercisePlan = 1;
-    ExercisePlan *ex = new ExercisePlan[sizeOfExercisePlan];
+    // int sizeOfExercisePlan = 1;
+    // ExercisePlan *ex = new ExercisePlan[sizeOfExercisePlan];
 
-    std::ifstream PlanRead;
-    PlanRead.open("Data/exercisePlans.txt");
+    // std::ifstream PlanRead;
+    // PlanRead.open("Data/exercisePlans.txt");
 
-    int indexOfPlan = 0;
+    // int indexOfPlan = 0;
 
-    int planId = 0;
-    int trainerId = 0; int equipmentId = 0; int duration = 0;
-    Trainers tr;
-    Equipment eq;
-    if(PlanRead.is_open()){
-        while(!PlanRead.eof()){
-            PlanRead >> planId;
-            PlanRead >> equipmentId;
-            PlanRead >> trainerId;
-            PlanRead >> duration;
-            tr.setTrainerId(trainerId);
-            eq.setEquipmentId(equipmentId);
-            ex[indexOfPlan].setExercisePlan(planId, tr, eq, duration);
-            indexOfPlan++;
-            sizeOfExercisePlan++;
-            increaseSize<ExercisePlan>(ex, sizeOfExercisePlan);
+    // int planId = 0;
+    // int trainerId = 0; int equipmentId = 0; int duration = 0;
+    // Trainers tr;
+    // Equipment eq;
+    // if(PlanRead.is_open()){
+    //     while(!PlanRead.eof()){
+    //         PlanRead >> planId;
+    //         PlanRead >> equipmentId;
+    //         PlanRead >> trainerId;
+    //         PlanRead >> duration;
+    //         tr.setTrainerId(trainerId);
+    //         eq.setEquipmentId(equipmentId);
+    //         ex[indexOfPlan].setExercisePlan(planId, tr, eq, duration);
+    //         indexOfPlan++;
+    //         sizeOfExercisePlan++;
+    //         increaseSize<ExercisePlan>(ex, sizeOfExercisePlan);
+    //     }
+    // }
+
+    // for (int i = 0; i < sizeOfExercisePlan - 1; i++)
+    // {
+    //     ex[i].printPlan();
+    // }
+
+    int sizeOfSubData = 1;
+    Subscription *s = new Subscription[sizeOfSubData];
+    int indexOfSub = 0;
+
+    int id, d, m, y, cusId, planId;
+
+    std::ifstream loadSub;
+    loadSub.open("Data/subscriptions.txt");
+
+    if(loadSub.is_open()){
+        while(!loadSub.eof()){
+            loadSub >> id >> d >> m >> y >> cusId >> planId;
+            Date date;
+            Customer c;
+            ExercisePlan ex;
+            date.setDate(d, m, y);
+            c.setCustomerId(cusId);
+            ex.setExercisePlanId(planId);
+            s[indexOfSub].setIdOfSubscription(id);
+            s[indexOfSub].setCustomerId(c);
+            s[indexOfSub].setDate(date);
+            s[indexOfSub].setExercisePlanId(ex);
+            indexOfSub++;
+            sizeOfSubData++;
+            increaseSize<Subscription>(s, sizeOfSubData);
         }
     }
-
-    for (int i = 0; i < sizeOfExercisePlan - 1; i++)
+    for (int i = 0; i < sizeOfSubData - 1; i++)
     {
-        ex[i].printPlan();
+        s[i].printData();
     }
+    
 }
