@@ -1120,10 +1120,10 @@ public:
                     SubMenu();
                     std::cin >> usrChoice;
                     if (subMenu(usrChoice == 1)) {
-                        dateArray[dateIndex].userInput();
-                        dateIndex++;
                         dateArraySize++;
                         increaseSize<Date>(dateArray, dateArraySize);
+                        dateArray[dateIndex].userInput();
+                        dateIndex++;
                         std::cout << "1 new Date Added Successfully\n";
                     }
                     else if (subMenu(usrChoice) == 3) {
@@ -1154,9 +1154,7 @@ public:
                         }
                     }
                     else if (subMenu(usrChoice) == 4) {
-                        customerArray[customerIndex].userInput();
                         customerArraySize++;
-                        customerIndex++;
                         Customer* temp = new Customer[customerArraySize];
                         for (int i = 0; i < customerArraySize - 1; i++)
                         {
@@ -1164,7 +1162,13 @@ public:
                         }
                         delete[] customerArray;
                         customerArray = temp;
+                        customerArray[customerIndex].userInput();
+                        customerIndex++;
                         std::cout << "1 Customer added successfully\n";
+                        for (int i = 0; i < customerArraySize; i++)
+                        {
+                            customerArray[i].printCustomerData();
+                        }
                     }
                     else if (subMenu(usrChoice) == 5) {
                         int id = 0;
@@ -1208,9 +1212,7 @@ public:
                         }
                     }
                     else if (subMenu(usrChoice) == 7) {
-                        trainerArray[trainerIndex].inputData();
                         trainerArraySize++;
-                        trainerIndex++;
                         Trainers* temp = new Trainers[trainerArraySize];
                         for (int i = 0; i < trainerArraySize - 1; i++)
                         {
@@ -1218,6 +1220,12 @@ public:
                         }
                         delete[] trainerArray;
                         trainerArray = temp;
+                        trainerArray[trainerIndex].inputData();
+                        trainerIndex++;
+                        for (int i = 0; i < trainerArraySize; i++)
+                        {
+                            trainerArray[i].printTrainer();
+                        }
                         std::cout << "1 Trainers added successfully\n";
                     }
                     else if (subMenu(usrChoice) == 8) {
@@ -1262,9 +1270,7 @@ public:
                         }
                     }
                     else if (subMenu(usrChoice) == 10) {
-                        equipmentArray[trainerIndex].inputData();
                         equipmentArraySize++;
-                        equipmentIndex++;
                         Equipment* temp = new Equipment[equipmentArraySize];
                         for (int i = 0; i < equipmentArraySize - 1; i++)
                         {
@@ -1272,6 +1278,8 @@ public:
                         }
                         delete[] equipmentArray;
                         equipmentArray = temp;
+                        equipmentArray[trainerIndex].inputData();
+                        equipmentIndex++;
                         std::cout << "1 Equipment added successfully\n";
                     }
                     else if (subMenu(usrChoice) == 11) {
@@ -1316,9 +1324,7 @@ public:
                         }
                     }
                     else if (subMenu(usrChoice) == 13) {
-                        exercisePlanArray[exercisePlanIndex].inputData();
                         exercisePlanArraySize++;
-                        exercisePlanIndex++;
                         ExercisePlan* temp = new ExercisePlan[exercisePlanArraySize];
                         for (int i = 0; i < exercisePlanArraySize - 1; i++)
                         {
@@ -1326,6 +1332,8 @@ public:
                         }
                         delete[] exercisePlanArray;
                         exercisePlanArray = temp;
+                        exercisePlanArray[exercisePlanIndex].inputData();
+                        exercisePlanIndex++;
                         std::cout << "1 ExercisePlan added successfully\n";
                     }
                     else if (subMenu(usrChoice) == 14) {
@@ -1370,9 +1378,7 @@ public:
                         }
                     }
                     else if (subMenu(usrChoice) == 16) {
-                        subscriptionArray[subscriptionIndex].inputData();
                         subscriptionArraySize++;
-                        exercisePlanIndex++;
                         Subscription* temp = new Subscription[subscriptionArraySize];
                         for (int i = 0; i < subscriptionArraySize - 1; i++)
                         {
@@ -1380,7 +1386,14 @@ public:
                         }
                         delete[] subscriptionArray;
                         subscriptionArray = temp;
+                        subscriptionArray[subscriptionIndex].inputData();
+                        exercisePlanIndex++;
                         std::cout << "1 Subscription added successfully\n";
+                        for (int i = 0; i < subscriptionArraySize; i++)
+                        {
+                            subscriptionArray[i].printData();
+                        }
+                        
                     }
                     else if (subMenu(usrChoice) == 17) {
                         int id = 0;
@@ -1482,7 +1495,7 @@ public:
                     }
                 }
                 if(temp != 0){
-                    std::cout << "----------  G Y M - S C H E D U L E-------------\n";
+                    std::cout << "---------- G Y M - S C H E D U L E -------------\n";
                     std::cout << "Plan id\n";
                     subscriptionArray[temp].printData();
                 }
