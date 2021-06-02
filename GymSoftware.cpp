@@ -1165,10 +1165,6 @@ public:
                         customerArray[customerIndex].userInput();
                         customerIndex++;
                         std::cout << "1 Customer added successfully\n";
-                        for (int i = 0; i < customerArraySize; i++)
-                        {
-                            customerArray[i].printCustomerData();
-                        }
                     }
                     else if (subMenu(usrChoice) == 5) {
                         int id = 0;
@@ -1389,10 +1385,6 @@ public:
                         subscriptionArray[subscriptionIndex].inputData();
                         exercisePlanIndex++;
                         std::cout << "1 Subscription added successfully\n";
-                        for (int i = 0; i < subscriptionArraySize; i++)
-                        {
-                            subscriptionArray[i].printData();
-                        }
                         
                     }
                     else if (subMenu(usrChoice) == 17) {
